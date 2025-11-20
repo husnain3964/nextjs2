@@ -5,7 +5,17 @@
   padding: 30px;
   background: #000; 
 }
+.filter li{
+  color: white;
+  padding-left:25px ;
+list-style: none;
+font-size: 28px;
 
+}
+.filter{
+  display: flex;
+  justify-content: center;
+}
 .box {
   background: #111; 
   border: 1px solid #222;
