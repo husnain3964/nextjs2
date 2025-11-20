@@ -1,0 +1,45 @@
+
+.main {
+  width: 100%;
+  background-color: black;
+ }
+
+.navber {
+  display: flex;
+  justify-content: space-between;   align-items: center;
+  padding: 15px 25px;
+}
+
+.logo {
+  font-size: 27px;
+  font-weight: bold;
+  color:white;
+ 
+}
+
+.points {
+  display: flex;
+  list-style: none;
+
+}
+
+.points li {
+  margin-left: 25px;
+  
+  font-size: 15px;
+  color:white;
+
+}
+
+.points li:hover {
+  color: grey; 
+}
+
+
+
+.main button {
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+  background-color: black;
+}
