@@ -81,18 +81,6 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* {
-     
-      data?.map((item :Products)=> {
-        return(
-        <div className="cardContainer" key={item.id} >
-            <h2 className="title">{item.title}</h2>
-            <h2 className="category">{item.category}</h2>
-            <h2 className="price">{item.price}</h2>
-            <p className="description">{item.description}</p>
-        </div>
-      )})
-    } */}
       <button onClick={logout}>logout</button>
 
       {loading ? (
