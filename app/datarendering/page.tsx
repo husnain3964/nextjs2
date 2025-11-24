@@ -3,7 +3,7 @@ import { useState } from "react";
 import Styles from "./data.module.css";
 import Image from "next/image";
 import { log } from "console";
-export default function RenderData({ data }: any) {
+export default function RenderData({ data}: any) {
   console.log(data.category);
   const btn = ["JEwelery", "Electronics", "men's clothing", "all"];
 
@@ -14,14 +14,9 @@ export default function RenderData({ data }: any) {
 
   return (
     <div className="container">
-      <div className={Styles.filter}>
-        {btn.map((singleBtn: any) => (
-          <li key={singleBtn} onClick={() => setType(singleBtn)}>
-            {singleBtn}
-          </li>
-        ))}
-      </div>
-
+      
+    
+   
       <div className={Styles.data}>
         {(type=="all" ? data:filteredData).map((item: any) => (
           <div key={item.id} className={Styles.box}>

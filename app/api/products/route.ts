@@ -1,8 +1,9 @@
-import { json } from "stream/consumers";
 
-export async function Get(request :Request){
+
+export async function GET(request :Request){
 
 const {searchParams} = new URL(request.url);
+
 
 const category  =searchParams.get("category")
 
@@ -19,9 +20,9 @@ const res = await fetch(url, {
 });
 
 
-const data = res.json()
+const data =  await res.json()
 
-return   new Response (JSON.stringify(data))
+return  new Response (JSON.stringify(data))
 
 
 }

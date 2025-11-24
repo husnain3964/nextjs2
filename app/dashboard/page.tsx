@@ -1,82 +1,107 @@
-"use client"
-import styles from "./dashboard.module.css"
-import { useRouter, useSearchParams } from "next/navigation"
-import dataFetching from "../getDataAsServerSide/page"
-import RenderData from "../datarendering/page"
-import { useEffect, useState } from "react"
-
-
+"use client";
+import styles from "./dashboard.module.css";
+import { useRouter, useSearchParams } from "next/navigation";
+// import dataFetching from "../getDataAsServerSide/page"
+// import RenderData from "../datarendering/page";
+import { useEffect, useState } from "react";
+import RenderData from "../datarendering/page";
 
 interface Products {
-    id: "number";
-    title: "string";
-    category: "string";
-    price: "number";
-    description: 'number';
-    image: "string"
+  id: number;
+  title: string;
+  category: string;
+  price: number;
+  description: string;
+  image: string;
 }
 export default function Dashboard() {
+  const [data, setdata] = useState<Products[]>([]);
+  const [loading, setloading] = useState<Boolean>(false);
+  const searchParams = useSearchParams();
 
+  const filter = searchParams.get("category") || "";
 
-    const [data, setdata] = useState<Products[]>([])
+  const router = useRouter();
 
-    const searchParams = useSearchParams()
+  const logout = () => {
+    alert("successfully logout");
+    setTimeout(() => {
+      router.push("/login");
+    }, 2000);
+  };
 
-    const filter = searchParams.get("category") || ""
+  useEffect(() => {
+    async function load() {
+      try {
+        setloading(true);
+        const result = await fetch(
+          `/api/products?category=${encodeURIComponent(filter)}`,
+          {
+            cache: "no-store",
+          }
+        );
+        if (!result.ok) throw new Error("result is not ok");
 
+        const json: Products[] = await result.json();
 
-    const router = useRouter()
-
-    const logout = () => {
-        alert("successfully logout")
-        setTimeout(() => {
-            router.push("/login")
-        }, 2000);
+        setdata(json);
+        setloading(false);
+      } catch (error) {
+        console.log(error);
+        setdata([]);
+      }
     }
+    load();
+  }, [filter]);
 
-
-
-
-    useEffect(() => {
-        async function load() {
-
-            try {
-                const result = await fetch(`/api/products?category=${encodeURIComponent(filter)}`, {
-                    cache: "no-store"
-                })
-
-                const json: Products[] = await result.json()
-
-                setdata(json)
-            } catch (error) {
-                console.log(error
-                );
-                setdata([])
-
-
+  return (
+    <div className={styles.main}>
+      <div className={styles.navber}>
+        <h1 className={styles.logo}>dashboard</h1>
+        <div className={styles.points}>
+          <li onClick={() => router.push(`?category`)}>all</li>
+          <li
+            onClick={() =>
+              router.push(`?category=${encodeURIComponent("men's clothing")}`)
             }
-
-        }
-        load()
-    }, [filter]
-
-    )
-
-    return (
-        <div className={styles.main}>
-            <div className={styles.navber} >
-                <h1 className={styles.logo} >dashboard</h1>
-                <div className={styles.points}>
-                    <li onClick={()=>router.push("?category=${enc}")} >men's clothing</li>
-                    <li onClick={()=>router.push("?category=women's clothing")} >women's clothing</li>
-                    <li  onClick={()=>router.push("?category=jewelery")}>jewelery</li>
-                    <li   onClick={()=>router.push("?category=electronics")}>Electronics</li>
-                </div>
-            </div>
-
-
-            <button onClick={logout} >logout</button>
-            <RenderData data={data} />
+          >
+            men cloth
+          </li>
+          <li
+            onClick={() =>
+              router.push(`?category=${encodeURIComponent("women's clothing")}`)
+            }
+          >
+            women cloth{" "}
+          </li>
+          <li onClick={() => router.push(`?category=jewelery`)}>jewelery</li>
+          <li onClick={() => router.push(`?category=electronics`)}>
+            Electronics
+          </li>
         </div>
-    )
+      </div>
+
+      {/* {
+     
+      data?.map((item :Products)=> {
+        return(
+        <div className="cardContainer" key={item.id} >
+            <h2 className="title">{item.title}</h2>
+            <h2 className="category">{item.category}</h2>
+            <h2 className="price">{item.price}</h2>
+            <p className="description">{item.description}</p>
+        </div>
+      )})
+    } */}
+      <button onClick={logout}>logout</button>
+
+      {loading ? (
+        <div className={styles.wrapper}>
+          <div className={styles.spinner}>loading for data</div>
+        </div>
+      ) : (
+        <RenderData data={data} />
+      )}
+    </div>
+  );
 }
