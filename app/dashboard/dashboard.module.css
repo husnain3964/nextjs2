@@ -12,37 +12,53 @@
 }
 
 .logo {
-  font-size: 27px;
+  
   font-weight: bold;
-  color:white;
+  border-right: 5px solid #2da09b;
+  margin: 0;
+  padding: 0;
  
 }
 
 .points {
   display: flex;
   list-style: none;
+  justify-content: center;
+ 
+  margin: 20px;
 
 }
 
 .points li {
   margin-left: 25px;
   
-  font-size: 15px;
+  font-size: 25px;
   color:white;
+  font-family: Arial, Helvetica, sans-serif;
 
 }
 
 .points li:hover {
-  color: grey; 
+  color:#2da09b; 
 }
 
 
 
 .main button {
-  color: white;
-  padding: 10px;
+  color:#2da09b;
+  font-weight: bolder;
+ border: none;
   font-size: 20px;
-  background-color: black;
+  padding: 20px;
+  background-color: black
+ 
+;
+}
+.main button :hover{
+  color:  white;
+}
+.btn{
+  padding: 20px;
 }
 
 

@@ -1,11 +1,14 @@
 "use client";
 import styles from "./dashboard.module.css";
 import { useRouter, useSearchParams } from "next/navigation";
-// import dataFetching from "../getDataAsServerSide/page"
-// import RenderData from "../datarendering/page";
+import logo from "../../assets/logo.png";
 import { useEffect, useState } from "react";
 import RenderData from "../datarendering/page";
-
+import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faCartArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { faAmazonPay } from "@fortawesome/free-brands-svg-icons";
 interface Products {
   id: number;
   title: string;
@@ -57,31 +60,48 @@ export default function Dashboard() {
   return (
     <div className={styles.main}>
       <div className={styles.navber}>
-        <h1 className={styles.logo}>dashboard</h1>
-        <div className={styles.points}>
-          <li onClick={() => router.push(`?category`)}>all</li>
-          <li
-            onClick={() =>
-              router.push(`?category=${encodeURIComponent("men's clothing")}`)
-            }
-          >
-            men cloth
-          </li>
-          <li
-            onClick={() =>
-              router.push(`?category=${encodeURIComponent("women's clothing")}`)
-            }
-          >
-            women cloth{" "}
-          </li>
-          <li onClick={() => router.push(`?category=jewelery`)}>jewelery</li>
-          <li onClick={() => router.push(`?category=electronics`)}>
-            Electronics
-          </li>
+        <Image
+          className={styles.log}
+          src="/logo.png"
+          alt="Company Logo"
+          width={200}
+          height={120}
+          priority
+        />
+<div className={styles.btn}>
+        <button > 
+          <FontAwesomeIcon icon={faCartArrowDown} />
+        </button>
+        <button > 
+          <FontAwesomeIcon icon={faAmazonPay } />
+        </button>
+        <button onClick={logout}> 
+          <FontAwesomeIcon icon={faRightFromBracket } />
+        </button>
         </div>
       </div>
 
-      <button onClick={logout}>logout</button>
+      <div className={styles.points}>
+        <li onClick={() => router.push(`?category`)}>Store</li>
+        <li
+          onClick={() =>
+            router.push(`?category=${encodeURIComponent("men's clothing")}`)
+          }
+        >
+          Men's clothing
+        </li>
+        <li
+          onClick={() =>
+            router.push(`?category=${encodeURIComponent("women's clothing")}`)
+          }
+        >
+          Women's clothing{" "}
+        </li>
+        <li onClick={() => router.push(`?category=jewelery`)}>Jewelery</li>
+        <li onClick={() => router.push(`?category=electronics`)}>
+          Electronics
+        </li>
+      </div>
 
       {loading ? (
         <div className={styles.wrapper}>
