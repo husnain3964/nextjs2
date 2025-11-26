@@ -1,28 +1,21 @@
 "use client"
 
+import styles from "./modal.module.css";
 
 
-interface ModalData{
-    image:string;
-    price:number;
-    id:number;
-    description:string;
-    title:string;
+export default  function  Modal({product , closeModal}:any){
 
-}
-export default  function  Modal(){
-
-  
-
+    
 
 return(
-    <div className="modal">
-        <img src="" alt="" />
-        <h2 className="title"></h2>
-        <h1 className="id"></h1>
-        <p className="price"></p>
-        <p className="descrip"></p>
-        <button className="cart"></button>
+    <div className={styles.modal}>
+        <button  onClick={closeModal}  className={styles.close}>X</button>
+        <img  className={styles.image} src={product.image} alt="" />
+        <h2 className={styles.title}>{product.title}</h2>
+        <h1 className={styles.id}>{product.id}</h1>
+        <p className={styles.price}>{product.price}</p>
+        <p className={styles.descrip}>{product.description}</p>
+        <button className={styles.cart}>Add to cart</button>
     </div>
 )
 
